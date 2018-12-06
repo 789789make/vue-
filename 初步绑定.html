@@ -113,7 +113,7 @@
         		self.data[key]=newVal;
         	}
         })
-        }
+        } //简化操作，接近原生vue：newVue.data.name=>newVue.name
      var div1=document.querySelector('#div1')
      var newVue=new selfVue(Book,div1,'name')
      
@@ -121,15 +121,15 @@
             console.log('name改变了');
             newVue.data.name='666'
      },3000)
-     //执行顺序 newVue赋予属性data:值为传入的data数据,之后遍历data,给其中的每个对象都设置其get/set方法，并且实例化一个dep对象，里面有一个空数组和prototype中的属性方法，95行赋值调用一次get方法，此时Dep.target还不存在（实例化watch才会出现）,随即返回val,val为newVue中.data[name]的值，即为目标元素(div1/el)的文本
-     //往下执行，实例化watch对象，传入三个参数，分别是this(此时this指向selfVue),div1(100行获取的Dom节点),fn(即为更新时调用的方法,el/选中元素的innerHTML为传入的value参数),
+     //执行顺序 newVue赋予属性data:值为传入的data数据,之后遍历data,给其中的每个对象都设置其get/set方法，并且实例化一个dep对象，里面有一个空数组和prototype中的属性方法，98行赋值调用一次get方法，此时Dep.target还不存在（实例化watch才会出现）,随即返回val,val为newVue中.data[name]的值，即为目标元素(div1/el)的文本
+     //往下执行，实例化watch对象，传入三个参数，分别是this(此时this指向selfVue),div1(117行获取的Dom节点),fn(即为更新时调用的方法,el/选中元素的innerHTML为传入的value参数),
      //实例化对象，前三个参数即为传入的实参，后一个调用了watch.prototype的get方法，此时Dep.target为this(this指向实例化的watch)，定义一个内部参数value值为this.obj(指向实例化的watcher).data[name],也就是101行中的Book对象的name属性,这个时候触发observer的getter,把Dep.target传入原本为空的subs[]中，此时生成了一个watcher存在subs中，传入之后清空Dep.target,返回value显示在innerHTML中
 
      //过3s后执行定时器内容,触发setAndGet对nane绑定的set方法，具体步骤为：1.判断新旧值是否相等：等=>跳出方法过程结束,不等:=>val为新的newVal（val为开始setAndGet时候传入的），调用dep.notify(),notify:遍历dep.subs中的内容function(sub)中的sub为watcher对象，所以可以执行update;update:调用watcher.prototype中的run=>局部变量value=更新后的值(注:此时会重新触发getter,但并无大碍因为不会修改.target)，判断新旧是否相等,不等:=>调用fn.call(this.obj,value),第一个参数改变this指向watcher对象，后面的就是传入值，即会触发el.innerHTML=watcher.value;
       
 
       
-        //简化操作，接近原生vue：newVue.data.name=>newVue.name
+       
 
 
         
