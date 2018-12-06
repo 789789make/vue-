@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+
+	<meta charset="UTF-8">
+	<title>Document</title>
+    <script type="text/javascript">
+        
+    </script>
+</head>
+<body>
+    <div id='div1'>
+	</div>
+     <script type="text/javascript" src="watcher.js"></script>
+    <script type="text/javascript" src="setAndGet.js"></script>
+    <script type="text/javascript" src="likeObserver.js"></script>
+   
+    <script type="text/javascript" src="Complie.js"></script>
+    <script type="text/javascript" src="selfVue.js"></script>
+	<script>
+     console.log(Watcher);
+     var Book={name:'从入门到放弃',date:'2019121607',a:{b:'1',c:2}};
+     var div1=document.querySelector('#div1')
+     var newVue=new selfVue(Book,div1,'name')
+     setTimeout(function(){
+            console.log('name改变了');
+            newVue.data.name='666'
+     },3000)    
+	</script>
+     
+</body>
+</html>
