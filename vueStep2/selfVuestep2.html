@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="watcher.js"></script>
+    <script type="text/javascript" src="setAndGet.js"></script>
+    <script type="text/javascript" src="likeObserver.js"></script>
+    <script type="text/javascript" src="Complie.js"></script>
+    <script type="text/javascript" src="selfVue.js"></script>
+    <script type="text/javascript">
+    </script>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{msg}}</p>
+         <p>111</p>
+          <p>111</p>
+        {{title}}
+        {{name}}
+        <p>{{name}}</p>
+        <p>{{message}}<p>
+    </div>
+    <script type="text/javascript">
+    var selfVue = new SelfVue({
+        el: '#app',
+        data: {
+            title: 'HELLO',
+            name: 'WORLD',
+            msg:'过了一段时间会改变',
+            message:''
+        }
+    });
+    window.setTimeout(function () {
+        selfVue.title = selfVue.title.toLowerCase()
+    }, 2000);
+    window.setTimeout(function () {
+        selfVue.name = selfVue.name.toLowerCase()
+    }, 3500);
+    window.setTimeout(function () {
+        selfVue.message='基本功能已经实现，但是仍然有点小问题，当出现{{title}}{{name}}连在一起的情况时只会改变前者,并且只针对{{}}进行绑定';
+    }, 4000);
+
+    </script>
+</body>
+
+</html>
